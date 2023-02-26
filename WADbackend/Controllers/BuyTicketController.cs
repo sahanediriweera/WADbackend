@@ -12,5 +12,13 @@ namespace WADbackend.Controllers
         {
             return Ok();
         }
+
+        [HttpPut]
+        [Route("editbuyticket")]
+
+        public async Task<IActionResult> EditBuyTicket()
+        {
+            return Ok();
+        }
     }
 }

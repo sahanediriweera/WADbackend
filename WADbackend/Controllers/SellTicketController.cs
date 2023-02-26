@@ -13,5 +13,13 @@ namespace WADbackend.Controllers
         {
             return StatusCode(201);
         }
+
+        [HttpPut]
+        [Route("buyticket")]
+
+        public async Task<IActionResult> EditBuyMovie(SellTicket sellTicket)
+        {
+            return Ok();
+        }
     }
 }

@@ -45,7 +45,7 @@ namespace WADbackend.Controllers
 
         public async Task<IActionResult> SearchMovies(String Name)
         {
-            return Ok(new List<MovieSearch> { new MovieSearch() { Title = " titke", ImageUrl = "d:/batman.jpg", Description = "wer" }, new MovieSearch() { Title = " titke", ImageUrl = "d:/batman.jpg", Description = "wer" }, new MovieSearch() { Title = " titke", ImageUrl = "d:/batman.jpg", Description = "wer" } });
+            return Ok(new List<MovieSearch> { new MovieSearch() { Title = " titke", ImageUrl = "d:/batman.jpg", Description = "wer",Language = "" }, new MovieSearch() { Title = " titke", ImageUrl = "d:/batman.jpg", Description = "wer", Language = "" }, new MovieSearch() { Title = " titke", ImageUrl = "d:/batman.jpg", Description = "wer", Language = "" } });
         }
 
     }

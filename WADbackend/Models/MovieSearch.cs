@@ -8,5 +8,7 @@
 
         public String Description { get; set; }
 
+        public String Language { get; set; }
+
     }
 }

@@ -21,5 +21,14 @@ namespace WADbackend.Controllers
         {
             return Ok(new List<TitlePurchase>() { new TitlePurchase { Title = "xcv", purchases = 12 }, new TitlePurchase { Title = "eefe", purchases = 132 }, new TitlePurchase { Title = "fe", purchases = 123 } });
         }
+
+        [HttpDelete]
+        [Route("deletemovie")]
+
+        public async Task<IActionResult> DeleteMovie(int id)
+        {
+            return Ok();
+        }
+
     }
 }

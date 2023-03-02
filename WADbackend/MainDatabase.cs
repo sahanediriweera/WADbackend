@@ -22,8 +22,10 @@ namespace WADbackend
 
         public DbSet<Seller> sellers { get; set; }
 
-        public DbSet<Buyer> buyer { get; set; }
+        public DbSet<Buyer> buyers { get; set; }
 
-        public DbSet<Ticket> ticket { get; set; }
+        public DbSet<Ticket> tickets { get; set; }
+
+        public DbSet<Movie> movies { get; set; }
     }
 }

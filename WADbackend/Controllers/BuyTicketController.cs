@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WADbackend.Controllers
 {
@@ -8,6 +9,7 @@ namespace WADbackend.Controllers
     {
         [HttpPost]
         [Route("buyticket")]
+        [Authorize]
         public async Task<IActionResult> BuyTicket()
         {
             return Ok();

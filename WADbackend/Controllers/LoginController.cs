@@ -11,22 +11,17 @@ namespace WADbackend.Controllers
     [Route("api/[controller]")]
     public class LoginController : Controller
     {
+
+        private readonly MainDatabase _mainDatabase;
+
+        public LoginController(MainDatabase mainDatabase)
+        {
+            _mainDatabase = mainDatabase;
+        }
+
         [HttpPost]
         [Route("loginbuyer")]
         public async Task<IActionResult> LoginBuyer()
-        {
-            return Ok(getToken());
-        }
-
-        [HttpPost]
-        [Route("loginseller")]
-
-        public async Task<IActionResult> LoginSeller()
-        {
-            return Ok(getToken());
-        }
-
-        public AuthenticatedResponse getToken()
         {
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
@@ -38,7 +33,15 @@ namespace WADbackend.Controllers
                 signingCredentials: signinCredentials
             );
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
-            return new AuthenticatedResponse { token = tokenString };
+            return Ok(new AuthenticatedResponse { token = tokenString });
+        }
+
+        [HttpPost]
+        [Route("loginseller")]
+
+        public async Task<IActionResult> LoginSeller()
+        {
+            return Ok();
         }
     }
 }

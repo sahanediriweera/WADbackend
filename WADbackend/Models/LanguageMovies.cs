@@ -4,6 +4,6 @@
     {
         public String Name { get; set; }
 
-        public int Purchases { get; set; }
+        public Double Rating { get; set; }
     }
 }

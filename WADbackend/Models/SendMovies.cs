@@ -6,8 +6,6 @@
 
         public string Title { get; set; }
 
-        public String Image { get; set; }
-
         public String Description { get; set; }
 
     }

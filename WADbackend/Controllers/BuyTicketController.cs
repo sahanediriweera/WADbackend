@@ -78,8 +78,19 @@ namespace WADbackend.Controllers
         [HttpPut]
         [Route("editbuyticket")]
 
-        public async Task<IActionResult> EditBuyTicket()
+        public async Task<IActionResult> EditBuyTicket(EditBuyTicket editBuyTicket)
         {
+            var ticket = await this.mainDatabase.tickets.FindAsync(editBuyTicket.id);
+            
+            if(ticket == null)
+            {
+                return NotFound();
+            }
+            ticket.DateTime = editBuyTicket.Date + "," + editBuyTicket.Time;
+
+            this.mainDatabase.Entry(ticket).State = EntityState.Modified;
+            await this.mainDatabase.SaveChangesAsync();
+
             return Ok();
         }
     }

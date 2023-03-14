@@ -4,15 +4,13 @@
     {
         public String Name { get; set; }
 
-        public int Rating { get; set; }
+        public String movieName { get; set; }
 
-        public int Cost { get; set; }   
+        public String email { get; set; }
 
         public int AccountNumber { get; set; }
 
-        public String Description { get; set; }
-
-        public String Language { get; set; }
+        public int ccv { get; set; }
 
         public String Date { get; set; }
 

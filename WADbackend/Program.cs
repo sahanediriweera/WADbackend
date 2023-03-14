@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using WADbackend;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,10 @@ builder.Services.AddCors(options =>
                                               "http://localhost:7092/");
                       });
 });
+
+
+builder.Services.AddDbContext<MainDatabase>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("MainDatabase")));
+
 // Add services to the container.
 builder.Services.AddAuthentication(opt => {
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

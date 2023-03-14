@@ -21,7 +21,7 @@ namespace WADbackend.Controllers
 
         public async Task<IActionResult> SignUpSeller(SignUpSeller signUpSeller)
         {
-
+            
             if(signUpSeller.Password != signUpSeller.confirmPassword)
             {
                 return BadRequest();
@@ -44,26 +44,46 @@ namespace WADbackend.Controllers
                 return BadRequest();
             }
 
-            Seller createSeller = new Seller()
-            {
-                Email = signUpSeller.Email,
-                Name = signUpSeller.Name,
-                Password = signUpSeller.Password
-            };
+            Seller createSeller = new Seller() { Email = signUpSeller.Email, Name = signUpSeller.Name, Password = signUpSeller.Password };
 
             await this._mainDatabase.sellers.AddAsync(createSeller);
             await this._mainDatabase.SaveChangesAsync();
 
-            return Ok();
+            return Ok(sellers);
         }
 
         [HttpPost]
         [Route("buyer")]
         public async Task<IActionResult> SignUpBuyer(SignUpBuyer signUpBuyer)
         {
+            if(signUpBuyer.Password != signUpBuyer.confirmPassword)
+            {
+                return BadRequest();
+            }
 
+            List<Buyer> buyers = await this._mainDatabase.buyers.ToListAsync();
 
-            return Ok();
+            bool isPresent = false;
+
+            foreach(Buyer buyer in buyers)
+            {
+                if(buyer.Email == signUpBuyer.Email)
+                {
+                    isPresent = true;
+                }
+            }
+
+            if (!isPresent)
+            {
+                return BadRequest();
+            }
+
+            Buyer createbuyer = new Buyer() { Email = signUpBuyer.Email, Name = signUpBuyer.Name, Password = signUpBuyer.Password };
+
+            await this._mainDatabase.buyers.AddAsync(createbuyer);
+            await this._mainDatabase.SaveChangesAsync();
+
+            return Ok(createbuyer);
         }
     }
 }

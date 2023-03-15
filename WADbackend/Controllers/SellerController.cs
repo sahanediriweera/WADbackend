@@ -88,7 +88,7 @@ namespace WADbackend.Controllers
                 }
             }
 
-            List<Ticket> tickets = new List<Ticket>();
+            List<Ticket> tickets = await this.mainDatabase.tickets.ToListAsync();
 
             foreach (Ticket ticket in tickets)
             {
@@ -100,7 +100,7 @@ namespace WADbackend.Controllers
 
                     if(Equals(title, sellerYourMovies.Title))
                     {
-                        sellerYourMovies.purchases++;
+                        sellerYourMovies.purchases = sellerYourMovies.purchases + 1;
                         yourSellerMovies[i] = sellerYourMovies;
                     }
                 }

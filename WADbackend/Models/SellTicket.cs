@@ -17,5 +17,7 @@
         public String Date { get; set; }
 
         public String Time { get; set; }
+
+        public String Email { get; set; }
     }
 }

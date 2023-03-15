@@ -19,7 +19,6 @@ namespace WADbackend.Controllers
 
         [HttpPost]
         [Route("seller")]
-        [Authorize]
         public async Task<IActionResult> SignUpSeller(SignUpSeller signUpSeller)
         {
             
@@ -55,7 +54,6 @@ namespace WADbackend.Controllers
 
         [HttpPost]
         [Route("buyer")]
-        [Authorize]
         public async Task<IActionResult> SignUpBuyer(SignUpBuyer signUpBuyer)
         {
             if(signUpBuyer.Password != signUpBuyer.confirmPassword)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WADbackend.Models;
 
@@ -14,7 +15,7 @@ namespace WADbackend.Controllers
 
         [HttpGet]
         [Route("english")]
-
+        [Authorize]
         public async Task<IActionResult> EnglishMovies()
         {
             List<Movie> movies = await this.mainDatabase.movies.ToListAsync();
@@ -34,7 +35,7 @@ namespace WADbackend.Controllers
 
         [HttpGet]
         [Route("sinhala")]
-
+        [Authorize]
         public async Task<IActionResult> SinhalaMovies()
         {
             List<Movie> movies = await this.mainDatabase.movies.ToListAsync();
@@ -54,7 +55,7 @@ namespace WADbackend.Controllers
 
         [HttpGet]
         [Route("tamil")]
-
+        [Authorize]
         public async Task<IActionResult> TamilMovies()
         {
             List<Movie> movies = await this.mainDatabase.movies.ToListAsync();
@@ -74,7 +75,7 @@ namespace WADbackend.Controllers
 
         [HttpGet]
         [Route("upcoming")]
-
+        [Authorize]
         public async Task<IActionResult> UpcomingMovies()
         {
             List<Movie> movies = await this.mainDatabase.movies.ToListAsync();
@@ -91,7 +92,7 @@ namespace WADbackend.Controllers
 
         [HttpGet]
         [Route("search")]
-
+        [Authorize]
         public async Task<IActionResult> SearchMovies(String Name)
         {
             List<Movie> movies = await this.mainDatabase.movies.ToListAsync();

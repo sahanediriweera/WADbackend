@@ -69,7 +69,7 @@ namespace WADbackend.Controllers
 
         [HttpPut]
         [Route("editbuyticket")]
-
+        [Authorize]
         public async Task<IActionResult> EditBuyTicket(EditBuyTicket editBuyTicket)
         {
             var ticket = await this.mainDatabase.tickets.FindAsync(editBuyTicket.id);

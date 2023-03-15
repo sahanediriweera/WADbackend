@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WADbackend.Models;
 
@@ -18,6 +19,7 @@ namespace WADbackend.Controllers
 
         [HttpPost]
         [Route("sellticket")]
+        [Authorize]
         public async Task<IActionResult> SellMovie(SellTicket sellTicket)
         {
             List<Seller> sellers = await this.mainDatabase.sellers.ToListAsync();
@@ -68,7 +70,7 @@ namespace WADbackend.Controllers
 
         [HttpPut]
         [Route("buyticket")]
-
+        [Authorize]
         public async Task<IActionResult> EditSellMovie(SellTicket sellTicket)
         {
             List<Seller> sellers = await this.mainDatabase.sellers.ToListAsync();

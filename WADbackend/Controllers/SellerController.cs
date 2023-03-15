@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WADbackend.Models;
 
@@ -18,6 +19,7 @@ namespace WADbackend.Controllers
 
         [HttpGet]
         [Route("getmovies")]
+        [Authorize]
         public async Task<IActionResult> GetMovies(String email)
         {
             List<Seller> sellers = await this.mainDatabase.sellers.ToListAsync();
@@ -54,7 +56,7 @@ namespace WADbackend.Controllers
 
         [HttpGet]
         [Route("yourmovies")]
-
+        [Authorize]
         public async Task<IActionResult> YourMovies(String email)
         {
             List<Seller> sellers = await this.mainDatabase.sellers.ToListAsync();
@@ -110,7 +112,7 @@ namespace WADbackend.Controllers
 
         [HttpDelete]
         [Route("deletemovie")]
-
+        [Authorize]
         public async Task<IActionResult> DeleteMovie(int id)
         {
             var movie = await this.mainDatabase.movies.FindAsync(id);

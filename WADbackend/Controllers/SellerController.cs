@@ -18,29 +18,94 @@ namespace WADbackend.Controllers
 
         [HttpGet]
         [Route("getmovies")]
-        public async Task<IActionResult> GetMovies()
+        public async Task<IActionResult> GetMovies(String email)
         {
-            List<Movie> movies = await this.mainDatabase.movies.ToListAsync();
+            List<Seller> sellers = await this.mainDatabase.sellers.ToListAsync();
 
-            List<SendMovies> sendMovies = new List<SendMovies>();
+            Seller seller = null;
 
-            foreach (Movie movie in movies)
+            foreach (Seller s in sellers)
             {
-                if(movie.Language == "English")
+                if (s.Email == email)
                 {
-                    sendMovies.Add(new SendMovies() { Description = movie.Description, Id = movie.Id, Title = movie.Title });
+                    seller = s;
                 }
             }
 
-            return Ok(sendMovies);
+            if (seller == null)
+            {
+                return BadRequest();
+            }
+
+            List<SellerMovies> sellerMovies = new List<SellerMovies>();
+
+            List<Movie> movies = await this.mainDatabase.movies.ToListAsync();
+
+            foreach (Movie movie in movies)
+            {
+                if (movie.Seller.Id == seller.Id)
+                {
+                    sellerMovies.Add(new SellerMovies() { id = movie.Id, title = movie.Title, description = movie.Description  });
+                }
+            }
+
+            return Ok(sellerMovies);
         }
 
         [HttpGet]
         [Route("yourmovies")]
 
-        public async Task<IActionResult> YourMovies()
+        public async Task<IActionResult> YourMovies(String email)
         {
-            return Ok(new List<TitlePurchase>() { new TitlePurchase { Title = "xcv", purchases = 12 }, new TitlePurchase { Title = "eefe", purchases = 132 }, new TitlePurchase { Title = "fe", purchases = 123 } });
+            List<Seller> sellers = await this.mainDatabase.sellers.ToListAsync();
+
+            Seller seller = null;
+
+            foreach (Seller s in sellers)
+            {
+                if(s.Email == email)
+                {
+                    seller = s;
+                }
+            }
+
+            if(seller == null)
+            {
+                return BadRequest();
+            }
+
+            List<SellerYourMovies> yourSellerMovies = new List<SellerYourMovies>();
+
+            List<Movie> movies = await this.mainDatabase.movies.ToListAsync();
+
+            foreach(Movie movie in movies)
+            {
+                if(movie.Seller.Id == seller.Id)
+                {
+                    yourSellerMovies.Add(new SellerYourMovies() {id = movie.Id, Title = movie.Title, purchases = 0 });
+                }
+            }
+
+            List<Ticket> tickets = new List<Ticket>();
+
+            foreach (Ticket ticket in tickets)
+            {
+                String title = ticket.Title;
+                
+                for(int i = 0; i < yourSellerMovies.Count; i++)
+                {
+                    SellerYourMovies sellerYourMovies = yourSellerMovies[i];
+
+                    if(Equals(title, sellerYourMovies.Title))
+                    {
+                        sellerYourMovies.purchases++;
+                        yourSellerMovies[i] = sellerYourMovies;
+                    }
+                }
+            }
+
+            return Ok(yourSellerMovies);
+
         }
 
         [HttpDelete]

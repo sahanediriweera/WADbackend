@@ -41,15 +41,7 @@ namespace WADbackend.Controllers
 
             List<Movie> movies = await this.mainDatabase.movies.ToListAsync();
 
-            Movie movie = null;
-
-            foreach(Movie movie1 in movies)
-            {
-                if(movie1.Title == buyTicket.movieName)
-                {
-                    movie = movie1;
-                }
-            }
+            var movie = await this.mainDatabase.movies.FirstOrDefaultAsync(x => x.Id == buyTicket.id);
 
             if(movie == null)
             {

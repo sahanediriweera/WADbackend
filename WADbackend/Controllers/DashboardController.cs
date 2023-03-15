@@ -19,13 +19,13 @@ namespace WADbackend.Controllers
         {
             List<Movie> movies = await this.mainDatabase.movies.ToListAsync();
 
-            List<SendMovies> sendMovies = new List<SendMovies>();
+            List<MovieList> sendMovies = new List<MovieList>();
 
             foreach (Movie movie in movies)
             {
                 if (movie.Language == "English")
                 {
-                    sendMovies.Add(new SendMovies() { Description = movie.Description, Id = movie.Id, Title = movie.Title });
+                    sendMovies.Add(new MovieList() { Name = movie.Title, purchases = (movie.Cost == null) ? 0 : movie.Cost });
                 }
             }
 
@@ -39,13 +39,13 @@ namespace WADbackend.Controllers
         {
             List<Movie> movies = await this.mainDatabase.movies.ToListAsync();
 
-            List<SendMovies> sendMovies = new List<SendMovies>();
+            List<MovieList> sendMovies = new List<MovieList>();
 
             foreach (Movie movie in movies)
             {
                 if (movie.Language == "Sinhala")
                 {
-                    sendMovies.Add(new SendMovies() { Description = movie.Description, Id = movie.Id, Title = movie.Title });
+                    sendMovies.Add(new MovieList() { Name = movie.Title, purchases = (movie.Cost == null) ? 0 : movie.Cost });
                 }
             }
 
@@ -59,13 +59,13 @@ namespace WADbackend.Controllers
         {
             List<Movie> movies = await this.mainDatabase.movies.ToListAsync();
 
-            List<SendMovies> sendMovies = new List<SendMovies>();
+            List<MovieList> sendMovies = new List<MovieList>();
 
             foreach (Movie movie in movies)
             {
                 if (movie.Language == "Tamil")
                 {
-                    sendMovies.Add(new SendMovies() { Description = movie.Description, Id = movie.Id, Title = movie.Title });
+                    sendMovies.Add(new MovieList() { Name = movie.Title, purchases = (movie.Cost == null) ? 0 : movie.Cost });
                 }
             }
 
@@ -97,6 +97,20 @@ namespace WADbackend.Controllers
             List<Movie> movies = await this.mainDatabase.movies.ToListAsync();
 
             List<SendMovies> sendMovies = new List<SendMovies>();
+
+
+            if (Equals(Name, "."))
+            {
+                foreach (Movie movie in movies)
+                {
+                    
+                    sendMovies.Add(new SendMovies() { Description = movie.Description, Id = movie.Id, Title = movie.Title });
+                    
+                }
+
+                return Ok(sendMovies);
+            }
+
 
             foreach (Movie movie in movies)
             {

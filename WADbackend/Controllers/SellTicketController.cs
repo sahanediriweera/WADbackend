@@ -88,26 +88,12 @@ namespace WADbackend.Controllers
                 return BadRequest();
             }
 
-            List<Movie> movies = await this.mainDatabase.movies.ToListAsync();
+            var movie = await this.mainDatabase.movies.FirstOrDefaultAsync(x => x.Id == sellTicket.id);
 
-            int movieid = -1;
-
-            foreach(Movie movieselect in movies)
-            {
-                if(movieselect.Title == sellTicket.Name)
-                {
-                    movieid = movieselect.Id;
-                }
-            }
-
-            if(movieid <0)
+            if (movie == null)
             {
                 return NotFound();
             }
-
-            var movie = await this.mainDatabase.movies.FirstOrDefaultAsync(x => x.Id == movieid);
-
-            if(movie == null) { return BadRequest(); }
 
             movie.Rating = sellTicket.Rating;
             movie.AccountNumber = sellTicket.AccountNumber;

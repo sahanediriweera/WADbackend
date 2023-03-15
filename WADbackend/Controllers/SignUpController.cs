@@ -48,7 +48,7 @@ namespace WADbackend.Controllers
 
             await this._mainDatabase.sellers.AddAsync(createSeller);
             await this._mainDatabase.SaveChangesAsync();
-
+            sellers = await this._mainDatabase.sellers.ToListAsync();
             return Ok(sellers);
         }
 
@@ -73,7 +73,7 @@ namespace WADbackend.Controllers
                 }
             }
 
-            if (!isPresent)
+            if (isPresent)
             {
                 return BadRequest();
             }

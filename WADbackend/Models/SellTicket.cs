@@ -19,5 +19,7 @@
         public String Time { get; set; }
 
         public String Email { get; set; }
+
+        public int id { get; set; }
     }
 }

@@ -103,6 +103,7 @@ namespace WADbackend.Controllers
             movie.Description = sellTicket.Description;
             movie.DateTime = sellTicket.Date+","+sellTicket.Time;
             movie.Language = sellTicket.Language;
+            movie.Title = sellTicket.Name;
             
 
             this.mainDatabase.Entry(movie).State = EntityState.Modified;

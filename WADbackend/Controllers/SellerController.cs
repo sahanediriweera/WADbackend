@@ -124,8 +124,8 @@ namespace WADbackend.Controllers
 
             this.mainDatabase.movies.Remove(movie);
             await mainDatabase.SaveChangesAsync();
-
-            return Ok();
+            
+            return Ok(id);
         }
 
     }

@@ -3,3 +3,6 @@ This is a backend application (WebAPI) for a movie ticketing application. The fr
 This contains different API for the front end to function effectively and this has authentication and authorization as well.
 
 This project can be used by cloning the project and updating the dependencies and running it using dotnet application
+
+The database for this application is implemented using EntityFramework
+
